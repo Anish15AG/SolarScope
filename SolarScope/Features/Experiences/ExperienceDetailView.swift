@@ -76,10 +76,7 @@ struct ExperienceDetailView: View {
     private var launchBar: some View {
         HStack {
             NavigationLink {
-                ARExperienceView(
-                    title: experience.title,
-                    makeContent: { ExperienceContent.make(for: experience) }
-                )
+                experienceDestination
             } label: {
                 Label("Launch AR Experience", systemImage: "arkit")
                     .font(.body.weight(.semibold))
@@ -92,6 +89,21 @@ struct ExperienceDetailView: View {
         .padding(.horizontal, Layout.spacing)
         .padding(.vertical, 12)
         .background(.ultraThinMaterial, in: Rectangle())
+    }
+
+    /// Experiences with a dedicated scene provide their own view; the
+    /// remaining ones currently launch the shared shell with preview content.
+    @ViewBuilder
+    private var experienceDestination: some View {
+        switch experience {
+        case .solarSystem:
+            SolarSystemExperienceView()
+        case .marsExploration, .earthAndISS:
+            ARExperienceView(
+                title: experience.title,
+                makeContent: { ExperienceContent.make(for: experience) }
+            )
+        }
     }
 }
 
