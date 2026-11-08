@@ -76,7 +76,10 @@ struct ExperienceDetailView: View {
     private var launchBar: some View {
         HStack {
             NavigationLink {
-                PlaceholderARView(experience: experience)
+                ARExperienceView(
+                    title: experience.title,
+                    makeContent: { ExperienceContent.make(for: experience) }
+                )
             } label: {
                 Label("Launch AR Experience", systemImage: "arkit")
                     .font(.body.weight(.semibold))
