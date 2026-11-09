@@ -98,7 +98,9 @@ struct ExperienceDetailView: View {
         switch experience {
         case .solarSystem:
             SolarSystemExperienceView()
-        case .marsExploration, .earthAndISS:
+        case .marsExploration:
+            MarsExperienceView()
+        case .earthAndISS:
             ARExperienceView(
                 title: experience.title,
                 makeContent: { ExperienceContent.make(for: experience) }
