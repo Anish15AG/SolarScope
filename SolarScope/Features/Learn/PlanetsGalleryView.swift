@@ -31,20 +31,7 @@ struct PlanetsGalleryView: View {
 
     private func planetTile(_ planet: Planet) -> some View {
         VStack(spacing: 10) {
-            ZStack {
-                Circle()
-                    .fill(planet.tint.opacity(0.20))
-                Circle()
-                    .fill(
-                        LinearGradient(
-                            colors: [planet.tint, planet.tint.opacity(0.45)],
-                            startPoint: .topLeading,
-                            endPoint: .bottomTrailing
-                        )
-                    )
-                    .frame(width: 46, height: 46)
-            }
-            .frame(width: 74, height: 74)
+            PlanetThumb(planet: planet, size: 80)
 
             Text(planet.name)
                 .font(.subheadline.weight(.semibold))
@@ -60,6 +47,21 @@ struct PlanetsGalleryView: View {
     }
 }
 
+/// Miniature fixed thumbnail rendered from the body's own USDZ model,
+/// falling back to a tinted sphere while loading or if it cannot load.
+struct PlanetThumb: View {
+    let planet: Planet
+    var size: CGFloat = 80
+
+    var body: some View {
+        ModelThumbnail(assetName: planet.assetName, fallbackTint: UIColor(planet.tint))
+            // Thumbnails must never swallow the tile's navigation tap.
+            .allowsHitTesting(false)
+            .frame(width: size, height: size)
+            .accessibilityHidden(true)
+    }
+}
+
 /// Detailed data for a single Sun or planet entry.
 struct PlanetDetailView: View {
     let planet: Planet
@@ -70,19 +72,7 @@ struct PlanetDetailView: View {
         ScrollView {
             VStack(alignment: .leading, spacing: Layout.spacing) {
                 HStack(spacing: 14) {
-                    ZStack {
-                        Circle().fill(planet.tint.opacity(0.20))
-                        Circle()
-                            .fill(
-                                LinearGradient(
-                                    colors: [planet.tint, planet.tint.opacity(0.45)],
-                                    startPoint: .topLeading,
-                                    endPoint: .bottomTrailing
-                                )
-                            )
-                            .frame(width: 54, height: 54)
-                    }
-                    .frame(width: 84, height: 84)
+                    PlanetThumb(planet: planet, size: 84)
 
                     VStack(alignment: .leading, spacing: 4) {
                         Text(planet.name)
