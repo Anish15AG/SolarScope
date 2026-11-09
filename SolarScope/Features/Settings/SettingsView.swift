@@ -46,6 +46,7 @@ struct SettingsView: View {
                         .foregroundStyle(.secondary)
                 }
             }
+            .formStyle(.grouped)
             .navigationTitle("Settings")
         }
     }

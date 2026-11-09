@@ -1,12 +1,17 @@
 import SwiftUI
 
-/// Landing screen: branding, a short introduction and the featured experiences.
+/// Landing screen: a short introduction, the featured experiences and the
+/// learning catalogue, under a standard large navigation title.
 struct HomeView: View {
     var body: some View {
         NavigationStack {
             ScrollView {
                 VStack(alignment: .leading, spacing: Layout.sectionSpacing) {
-                    brandHeader
+                    Text("Bring the Solar System, Mars exploration and the International Space Station into your own space with interactive 3D models you can place, move and inspect.")
+                        .font(.callout)
+                        .foregroundStyle(.secondary)
+                        .fixedSize(horizontal: false, vertical: true)
+                        .frame(maxWidth: .infinity, alignment: .leading)
 
                     VStack(alignment: .leading, spacing: Layout.spacing) {
                         SectionHeader(
@@ -74,44 +79,12 @@ struct HomeView: View {
                 .constrainedWidth()
             }
             .screenBackground()
+            .navigationTitle("SolarScope")
+            .navigationBarTitleDisplayMode(.large)
             .learnDestinations()
         }
     }
 
-    private var brandHeader: some View {
-        VStack(alignment: .leading, spacing: 14) {
-            HStack(spacing: 14) {
-                ZStack {
-                    RoundedRectangle(cornerRadius: 16, style: .continuous)
-                        .fill(
-                            LinearGradient(
-                                colors: [Theme.accent, Theme.accent.opacity(0.55)],
-                                startPoint: .topLeading,
-                                endPoint: .bottomTrailing
-                            )
-                        )
-                    Image(systemName: "sun.max.fill")
-                        .font(.system(size: 26, weight: .bold))
-                        .foregroundStyle(Color.black.opacity(0.75))
-                }
-                .frame(width: 56, height: 56)
-
-                VStack(alignment: .leading, spacing: 2) {
-                    Text("SolarScope")
-                        .font(.system(.largeTitle, design: .rounded, weight: .bold))
-                    Text("Augmented reality space exploration")
-                        .font(.subheadline)
-                        .foregroundStyle(.secondary)
-                }
-            }
-
-            Text("Bring the Solar System, Mars exploration and the International Space Station into your own space with interactive 3D models you can place, move and inspect.")
-                .font(.callout)
-                .foregroundStyle(.secondary)
-                .fixedSize(horizontal: false, vertical: true)
-        }
-        .frame(maxWidth: .infinity, alignment: .leading)
-    }
 }
 
 /// Compact navigation tile used in the Home catalogue section.

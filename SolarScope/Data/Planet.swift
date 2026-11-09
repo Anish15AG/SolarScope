@@ -70,7 +70,7 @@ enum PlanetData {
         assetName: "Sun_1_1391000",
         visualRadius: 0.22,
         orbitRadius: 0,
-        rotationPeriod: 60,
+        rotationPeriod: 90,
         revolutionPeriod: 1
     )
 
