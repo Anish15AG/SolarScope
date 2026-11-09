@@ -91,8 +91,7 @@ struct ExperienceDetailView: View {
         .background(.ultraThinMaterial, in: Rectangle())
     }
 
-    /// Experiences with a dedicated scene provide their own view; the
-    /// remaining ones currently launch the shared shell with preview content.
+    /// Each experience launches its dedicated scene view.
     @ViewBuilder
     private var experienceDestination: some View {
         switch experience {
@@ -101,10 +100,7 @@ struct ExperienceDetailView: View {
         case .marsExploration:
             MarsExperienceView()
         case .earthAndISS:
-            ARExperienceView(
-                title: experience.title,
-                makeContent: { ExperienceContent.make(for: experience) }
-            )
+            EarthISSExperienceView()
         }
     }
 }
