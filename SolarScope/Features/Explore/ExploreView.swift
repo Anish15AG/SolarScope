@@ -6,10 +6,9 @@ struct ExploreView: View {
         NavigationStack {
             ScrollView {
                 VStack(alignment: .leading, spacing: Layout.spacing) {
-                    SectionHeader(
-                        "Explore",
-                        subtitle: "Choose an experience to launch in augmented reality"
-                    )
+                    Text("Choose an experience to launch in augmented reality")
+                        .font(.subheadline)
+                        .foregroundStyle(.secondary)
 
                     ForEach(Experience.allCases) { experience in
                         ExperienceCard(experience: experience, style: .detailed)
@@ -21,6 +20,8 @@ struct ExploreView: View {
                 .constrainedWidth()
             }
             .screenBackground()
+            .navigationTitle("Explore")
+            .navigationBarTitleDisplayMode(.large)
             .learnDestinations()
         }
     }
